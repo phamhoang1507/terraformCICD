@@ -1,0 +1,29 @@
+# Thư mục cache provider/module (nặng, tự tải lại bằng terraform init)
+**/.terraform/*
+
+# State file (chứa dữ liệu nhạy cảm: password, key, ARN...)
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+
+# File biến chứa giá trị bí mật
+*.tfvars
+*.tfvars.json
+
+# Log khi crash
+crash.log
+crash.*.log
+
+# Override cục bộ
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# File plan (có thể chứa secret)
+*.tfplan
+
+# Credentials / env
+.env
+.aws/
+*.pem

@@ -1,0 +1,7 @@
+services:
+  stack:
+   container_name: deploymentterraformcicd-test
+   image: deploymentterraformcicd
+   working_dir: /app/deployment
+   volumes:
+     - '.:/app/deployment'
