@@ -1,1 +1,20 @@
 
+image: public.ecr.aws/y3h5z9v5/clound:001
+size: 2x
+
+deploy-api: &deploy-api
+  name: "Deploy API"
+  script:
+    - echo "Deploying API..."
+pipelines:
+  custom:
+    staging-api:
+      - step:
+          <<: *deploy-api
+          name: "Deploy API to Staging"
+          deployment: staging
+    production-api:
+      - step:
+          <<: *deploy-api
+          name: "Deploy API to Production"
+          deployment: production
