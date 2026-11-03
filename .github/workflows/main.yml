@@ -1,20 +1,22 @@
+name: Deploy API
 
-image: public.ecr.aws/y3h5z9v5/clound:001
-size: 2x
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Môi trường deploy"
+        type: choice
+        options: [staging, production]
+        default: staging
 
-deploy-api: &deploy-api
-  name: "Deploy API"
-  script:
-    - echo "Deploying API..."
-pipelines:
-  custom:
-    staging-api:
-      - step:
-          <<: *deploy-api
-          name: "Deploy API to Staging"
-          deployment: staging
-    production-api:
-      - step:
-          <<: *deploy-api
-          name: "Deploy API to Production"
-          deployment: production
+jobs:
+  deploy-api:
+    name: Deploy API to ${{ inputs.environment }}
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+    container:
+      image: public.ecr.aws/y3h5z9v5/clound:001
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy API
+        run: echo "Deploying API to ${{ inputs.environment }}..."
